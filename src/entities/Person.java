@@ -11,6 +11,12 @@ private String email;
 private String address;
 
 
+
+    public Person() {
+
+    }
+
+
     public String getId() {
         return id;
     }

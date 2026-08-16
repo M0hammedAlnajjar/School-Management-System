@@ -2,13 +2,14 @@ package entities;
 
 import java.util.List;
 
-public class Student {
+public class Student extends Person {
     private String gradeLevel;
     private String enrollmentDate;
     private double feeBalance;
     private List<String> subjects;
 
-    public Student(String gradeLevel, double feeBalance, List<String> subjects, String enrollmentDate) {
+    public Student(String firstName, String lastName, String dateOfBirth, String gender, String phoneNumber, String email, String address, String gradeLevel, double feeBalance, List<String> subjects, String enrollmentDate) {
+        super(firstName, lastName, dateOfBirth, gender, phoneNumber, email, address);
         this.gradeLevel = gradeLevel;
         this.feeBalance = feeBalance;
         this.subjects = subjects;
