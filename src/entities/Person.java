@@ -1,6 +1,6 @@
 package entities;
 
-public abstract class Person {
+public abstract class Person{
 private String id;
 private String firstName;
 private String lastName;
@@ -90,7 +90,6 @@ private String address;
         this.email = email;
         this.address = address;
     }
-
 
     public abstract void  displayInfo();
 }

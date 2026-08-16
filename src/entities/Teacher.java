@@ -2,7 +2,8 @@ package entities;
 
 import java.util.List;
 
-public class Teacher {
+public class Teacher extends Person {
+
     private String subject;
     private int experienceYears;
     private double salary;
@@ -39,4 +40,10 @@ public class Teacher {
     public void setClassesTaught(List<String> classesTaught) {
         this.classesTaught = classesTaught;
     }
+
+
+
+    public void displayInfo() {
+
+        }
 }
