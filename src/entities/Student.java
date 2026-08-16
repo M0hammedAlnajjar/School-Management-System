@@ -47,4 +47,10 @@ public class Student extends Person {
     public void setSubjects(List<String> subjects) {
         this.subjects = subjects;
     }
+    @Override
+    public void  displayInfo(){
+
+
+
+    }
 }
