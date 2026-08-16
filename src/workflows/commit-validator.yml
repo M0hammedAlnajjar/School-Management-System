@@ -1,0 +1,506 @@
+# ========================================================
+# School Management System
+# Commit Message Validator
+# ========================================================
+#
+# This GitHub Actions workflow checks every commit
+# inside a Pull Request.
+#
+# A commit message must follow this format:
+#
+#   type: description
+#
+# Examples:
+#
+#   feat: add student registration
+#   fix: correct student search
+#   docs: update README
+#   test: add student service tests
+#
+# ========================================================
+
+
+# --------------------------------------------------------
+# Workflow name
+# --------------------------------------------------------
+#
+# This is the name that will appear inside
+# GitHub Actions.
+#
+# --------------------------------------------------------
+
+name: School Management - Commit Message Validator
+
+
+# --------------------------------------------------------
+# Workflow triggers
+# --------------------------------------------------------
+#
+# This workflow runs when:
+#
+# 1. A Pull Request is opened.
+# 2. New commits are pushed to the Pull Request.
+# 3. A Pull Request is reopened.
+#
+# --------------------------------------------------------
+
+on:
+
+  pull_request:
+
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+
+# --------------------------------------------------------
+# Permissions
+# --------------------------------------------------------
+#
+# contents: read
+#
+# Allows GitHub Actions to read the repository content.
+#
+# We only need to READ the repository because this
+# workflow does not modify any files.
+#
+# --------------------------------------------------------
+
+permissions:
+
+  contents: read
+
+
+# ========================================================
+# Jobs
+# ========================================================
+
+jobs:
+
+
+  # ======================================================
+  # Validate Commit Messages
+  # ======================================================
+  #
+  # This job checks every commit inside the Pull Request.
+  #
+  # ======================================================
+
+  validate-commits:
+
+
+    # ----------------------------------------------------
+    # Operating system
+    # ----------------------------------------------------
+    #
+    # GitHub will run this job on the latest Ubuntu server.
+    #
+    # ----------------------------------------------------
+
+    runs-on: ubuntu-latest
+
+
+    # ====================================================
+    # Steps
+    # ====================================================
+
+    steps:
+
+
+      # --------------------------------------------------
+      # Step 1: Checkout repository
+      # --------------------------------------------------
+      #
+      # actions/checkout downloads the repository into
+      # the GitHub Actions machine.
+      #
+      # fetch-depth: 0
+      #
+      # This downloads the COMPLETE Git history.
+      #
+      # We need the complete history because we want to
+      # check every commit inside the Pull Request.
+      #
+      # --------------------------------------------------
+
+      - name: Checkout repository
+
+        uses: actions/checkout@v4
+
+        with:
+
+          fetch-depth: 0
+
+
+      # --------------------------------------------------
+      # Step 2: Validate commit messages
+      # --------------------------------------------------
+      #
+      # This step contains the Bash script that checks
+      # every commit.
+      #
+      # --------------------------------------------------
+
+      - name: Validate commit messages
+
+        shell: bash
+
+        run: |
+
+
+          # =================================================
+          # Display validator header
+          # =================================================
+
+          echo "=========================================="
+
+          echo " School Management - Commit Validator"
+
+          echo "=========================================="
+
+          echo ""
+
+
+          # =================================================
+          # Allowed commit types
+          # =================================================
+          #
+          # Every commit must start with one of these types.
+          #
+          # feat     = New feature
+          # fix      = Bug fix
+          # chore    = Maintenance
+          # docs     = Documentation
+          # style    = Formatting
+          # refactor = Code restructuring
+          # test     = Tests
+          # perf     = Performance improvement
+          # build    = Build/dependency changes
+          # ci       = CI/CD changes
+          # revert   = Reverting previous changes
+          #
+          # =================================================
+
+          ALLOWED_TYPES="feat|fix|chore|docs|style|refactor|test|perf|build|ci|revert"
+
+
+          # =================================================
+          # Get Pull Request base commit
+          # =================================================
+          #
+          # BASE_SHA represents the commit where the
+          # Pull Request starts.
+          #
+          # Example:
+          #
+          # main:
+          #
+          # A ---- B ---- C
+          #                 \
+          #                  D ---- E
+          #
+          # C is the BASE commit.
+          #
+          # =================================================
+
+          BASE_SHA="${{ github.event.pull_request.base.sha }}"
+
+
+          # =================================================
+          # Get Pull Request head commit
+          # =================================================
+          #
+          # HEAD_SHA represents the latest commit in
+          # the Pull Request.
+          #
+          # In the example above:
+          #
+          # D ---- E
+          #
+          # E is the HEAD commit.
+          #
+          # =================================================
+
+          HEAD_SHA="${{ github.event.pull_request.head.sha }}"
+
+
+          # =================================================
+          # Display base and head commits
+          # =================================================
+
+          echo "Base commit: $BASE_SHA"
+
+          echo "Head commit: $HEAD_SHA"
+
+          echo ""
+
+
+          # =================================================
+          # Get every commit inside the Pull Request
+          # =================================================
+          #
+          # git rev-list
+          #
+          # Gets the commits between BASE and HEAD.
+          #
+          # --reverse
+          #
+          # Displays commits from oldest to newest.
+          #
+          # Example:
+          #
+          # BASE
+          #   |
+          #   ↓
+          # Commit 1
+          # Commit 2
+          # Commit 3
+          #   |
+          #   ↓
+          # HEAD
+          #
+          # =================================================
+
+          COMMITS=$(git rev-list --reverse "$BASE_SHA..$HEAD_SHA")
+
+
+          # =================================================
+          # Check if there are any commits
+          # =================================================
+          #
+          # If the Pull Request does not contain commits,
+          # there is nothing to validate.
+          #
+          # exit 0 means SUCCESS.
+          #
+          # =================================================
+
+          if [ -z "$COMMITS" ]; then
+
+            echo "No commits found in the Pull Request."
+
+            exit 0
+
+          fi
+
+
+          # =================================================
+          # Validation status
+          # =================================================
+          #
+          # 0 = All commits are valid.
+          #
+          # 1 = At least one commit is invalid.
+          #
+          # We start with 0.
+          #
+          # =================================================
+
+          VALIDATION_FAILED=0
+
+
+          # =================================================
+          # Check every commit
+          # =================================================
+          #
+          # The for loop goes through every commit.
+          #
+          # =================================================
+
+          for COMMIT in $COMMITS
+
+          do
+
+
+            # ------------------------------------------------
+            # Get commit message
+            # ------------------------------------------------
+            #
+            # git log -1
+            #
+            # Gets information about one commit.
+            #
+            # --pretty=%s
+            #
+            # Returns only the commit subject/message.
+            #
+            # ------------------------------------------------
+
+            MESSAGE=$(git log -1 --pretty=%s "$COMMIT")
+
+
+            # ------------------------------------------------
+            # Display commit information
+            # ------------------------------------------------
+
+            echo "------------------------------------------"
+
+            echo "Commit: $COMMIT"
+
+            echo "Message: $MESSAGE"
+
+
+            # =================================================
+            # Validate commit message
+            # =================================================
+            #
+            # Required format:
+            #
+            # type: description
+            #
+            # Example:
+            #
+            # feat: add student registration
+            #
+            # =================================================
+            #
+            # ^ 
+            # Start of the message.
+            #
+            # ($ALLOWED_TYPES)
+            #
+            # Must be one of the allowed commit types.
+            #
+            # :
+            #
+            # A colon is required.
+            #
+            # [[:space:]]
+            #
+            # A space is required after the colon.
+            #
+            # .+
+            #
+            # At least one description character is required.
+            #
+            # =================================================
+
+            if [[ "$MESSAGE" =~ ^($ALLOWED_TYPES):[[:space:]].+ ]]
+
+            then
+
+              echo "Status: PASS"
+
+            else
+
+              echo "Status: FAIL"
+
+              echo ""
+
+              echo "Invalid commit message:"
+
+              echo "$MESSAGE"
+
+              echo ""
+
+              echo "Expected format:"
+
+              echo "type: description"
+
+              echo ""
+
+              echo "Allowed types:"
+
+              echo "feat"
+
+              echo "fix"
+
+              echo "chore"
+
+              echo "docs"
+
+              echo "style"
+
+              echo "refactor"
+
+              echo "test"
+
+              echo "perf"
+
+              echo "build"
+
+              echo "ci"
+
+              echo "revert"
+
+              echo ""
+
+
+              # ----------------------------------------------
+              # Mark validation as failed.
+              #
+              # We DO NOT exit immediately here because
+              # we want to check ALL commits.
+              #
+              # ----------------------------------------------
+
+              VALIDATION_FAILED=1
+
+            fi
+
+
+          done
+
+
+          # =================================================
+          # Final validation result
+          # =================================================
+
+          echo ""
+
+          echo "=========================================="
+
+
+          # -------------------------------------------------
+          # Check whether any commit failed
+          # -------------------------------------------------
+
+          if [ "$VALIDATION_FAILED" -eq 1 ]
+
+          then
+
+            echo "Commit validation FAILED."
+
+            echo ""
+
+            echo "One or more commit messages are invalid."
+
+            echo "Please rename the invalid commits using:"
+
+            echo ""
+
+            echo "type: description"
+
+            echo ""
+
+            echo "Example:"
+
+            echo "feat: add student registration"
+
+            echo ""
+
+            # ----------------------------------------------
+            # exit 1 tells GitHub Actions that the job failed.
+            # ----------------------------------------------
+
+            exit 1
+
+
+          else
+
+            echo "All commit messages are valid."
+
+            echo ""
+
+            echo "Commit validation PASSED."
+
+
+          fi
+
+
+          # =================================================
+          # End of validator
+          # =================================================
+
+          echo "=========================================="
