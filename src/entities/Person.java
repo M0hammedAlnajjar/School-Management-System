@@ -74,4 +74,14 @@ private String address;
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+    public Person(String firstName, String lastName, String dateOfBirth, String gender, String phoneNumber, String email, String address) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
+        this.gender = gender;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.address = address;
+    }
 }
