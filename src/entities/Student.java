@@ -8,6 +8,13 @@ public class Student {
     private double feeBalance;
     private List<String> subjects;
 
+    public Student(String gradeLevel, double feeBalance, List<String> subjects, String enrollmentDate) {
+        this.gradeLevel = gradeLevel;
+        this.feeBalance = feeBalance;
+        this.subjects = subjects;
+        this.enrollmentDate = enrollmentDate;
+    }
+
     public String getGradeLevel() {
         return gradeLevel;
     }
