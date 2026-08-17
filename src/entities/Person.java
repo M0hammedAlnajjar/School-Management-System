@@ -91,16 +91,25 @@ private String address;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.address = address;
+
     }
 
 
     @Override
     public void displayInfo() {
-
+        System.out.println("Person: " + firstName + " " + lastName + " (id: " + id + ")");
     }
 
     @Override
     public String displaySummary() {
-        return "";
+        return id + " - " + firstName + " " + lastName;
+    }
+
+
+    @Override
+    public String toString() {
+
+        return "Person{id=" + id + ", name=" + firstName + " " + lastName + "}";
     }
 }
+
