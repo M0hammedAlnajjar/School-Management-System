@@ -1,5 +1,6 @@
 package entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Teacher extends Person {
@@ -15,6 +16,7 @@ public class Teacher extends Person {
         this.subject = subject;
         this.salary = salary;
         this.classesTaught = classesTaught;
+        this.classesTaught=new ArrayList<>();
     }
 
 
