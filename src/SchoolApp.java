@@ -10,6 +10,10 @@ public class SchoolApp {
     public static void main(String[] args) {
         SchoolApp app = new SchoolApp();
         app.loadSampleData();
+        app.run();
+    }
+
+    private void run() {
     }
 
     private void loadSampleData() {
