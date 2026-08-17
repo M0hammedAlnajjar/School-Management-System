@@ -30,6 +30,10 @@ public class Teacher extends Person {
     }
 
     public void setExperienceYears(int experienceYears) {
+        if (experienceYears < 0) {
+            System.out.println("Experience years cannot be negative");
+            this.experienceYears = 0;
+        }
         this.experienceYears = experienceYears;
     }
 
