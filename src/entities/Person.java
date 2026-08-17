@@ -23,6 +23,10 @@ public class Person implements Displayable {
     }
 
     public void setId(String id) {
+        if (utils.HelperUtils.isEmpty(id)) {
+            System.out.println("Id cannot be empty. Keeping the old id.");
+            return;
+        }
         this.id = id;
     }
 
