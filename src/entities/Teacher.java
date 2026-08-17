@@ -49,9 +49,9 @@ public class Teacher extends Person {
         this.classesTaught = classesTaught;
     }
 
-
-@Override
+    @Override
     public void displayInfo() {
 
-        }
+        super.displayInfo();
+    }
 }

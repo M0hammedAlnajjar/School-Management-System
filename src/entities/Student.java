@@ -49,9 +49,10 @@ public class Student extends Person {
     }
 
     @Override
-    public void  displayInfo(){
-
-
+    public void displayInfo() {
+        super.displayInfo();
 
     }
+
+
 }
