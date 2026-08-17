@@ -25,4 +25,12 @@ public class SeniorStudent extends Student {
     public void setGpa(double gpa) {
         this.gpa = gpa;
     }
+
+    @Override
+    public void displayInfo() {
+        System.out.println(" SeniorStudent: " + getFirstName());
+        System.out.println("Major: " + getMajor());
+        System.out.println("GPA: " + getGpa());
+
+    }
 }
