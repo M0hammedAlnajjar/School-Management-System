@@ -17,6 +17,7 @@ public class Teacher extends Person {
         this.classesTaught = classesTaught;
     }
 
+
     public String getSubject() {
         return subject;
     }
@@ -53,6 +54,10 @@ public class Teacher extends Person {
         this.classesTaught = classesTaught;
     }
 
+        public void updateSalary(double salary,String reason) {
+            setSalary(salary);
+            System.out.println("Salary updated"+reason);
+        }
     @Override
     public void displayInfo() {
 
