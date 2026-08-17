@@ -53,5 +53,6 @@ public class Teacher extends Person {
     public void displayInfo() {
 
         super.displayInfo();
+        System.out.println("Teacher:" +getFirstName()+ " "+getFirstName() + "| subject:" +subject +" | experienceYears:" +experienceYears + "  years" );
     }
 }
