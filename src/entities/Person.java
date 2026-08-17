@@ -3,15 +3,14 @@ package entities;
 import interfaces.Displayable;
 
 public class Person implements Displayable {
-private String id;
-private String firstName;
-private String lastName;
-private String dateOfBirth;
-private String gender;
-private String phoneNumber;
-private String email;
-private String address;
-
+    private String id;
+    private String firstName;
+    private String lastName;
+    private String dateOfBirth;
+    private String gender;
+    private String phoneNumber;
+    private String email;
+    private String address;
 
 
     public Person() {
@@ -111,5 +110,18 @@ private String address;
 
         return "Person{id=" + id + ", name=" + firstName + " " + lastName + "}";
     }
-}
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+
+        if (obj == null)
+            return false;
+
+
+        if (!(obj instanceof Person))  return false;
+        Person p= (Person) obj;
+        return this.id.equals(p.id);
+
+    }}
