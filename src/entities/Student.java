@@ -51,6 +51,7 @@ public class Student extends Person {
     @Override
     public void displayInfo() {
         super.displayInfo();
+        System.out.println("Student:"+getFirstName()+" "+getLastName()+"GradeLevel: " + gradeLevel+ " |fee balance: " + feeBalance);
 
     }
 
