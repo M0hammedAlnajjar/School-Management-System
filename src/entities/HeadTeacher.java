@@ -1,11 +1,23 @@
 package entities;
 
-public class HeadTeacher {
+import java.util.List;
+
+public class HeadTeacher extends Teacher {
     private double budgetAllocated;
     private String officeNumber;
     private int yearsOfExperience;
     private String email;
     private boolean isFullTime;
+
+
+    public HeadTeacher(String firstName, String lastName, String dateOfBirth, String gender, String phoneNumber, String email, String address, int experienceYears, String subject, double salary, List<String> classesTaught, double budgetAllocated, String officeNumber, int yearsOfExperience, String email1, boolean isFullTime) {
+        super(firstName, lastName, dateOfBirth, gender, phoneNumber, email, address, experienceYears, subject, salary, classesTaught);
+        this.budgetAllocated = budgetAllocated;
+        this.officeNumber = officeNumber;
+        this.yearsOfExperience = yearsOfExperience;
+        this.email = email1;
+        this.isFullTime = isFullTime;
+    }
 
     public double getBudgetAllocated() {
         return budgetAllocated;
@@ -45,5 +57,12 @@ public class HeadTeacher {
 
     public void setFullTime(boolean fullTime) {
         isFullTime = fullTime;
+    }
+
+    @Override
+    public void displayInfo() {
+        super.displayInfo();
+        System.out.println("Head Teacher: " + getFirstName() + " " + getLastName()
+                + " | budgetAllocated: " + budgetAllocated+ " | officeNumber" +officeNumber + " | yearsOfExperience: " + yearsOfExperience+ " | email: " + email+ "isFullTime"+isFullTime);
     }
 }
