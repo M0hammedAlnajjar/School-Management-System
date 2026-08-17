@@ -12,13 +12,16 @@ public class HelperUtils {
 
 
 
-
-
     public static int getCounter() {
         return counter;
     }
 
     public static void setCounter(int counter) {
         HelperUtils.counter = counter;
+    }
+
+    public static boolean isValidNumber(int value, int min, int max) {
+
+        return false;
     }
 }

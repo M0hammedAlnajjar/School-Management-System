@@ -3,7 +3,6 @@ import utils.InputHandler;
 
 public class SchoolApp {
 
-
     private StudentService studentService = new StudentService();
     private InputHandler input = new InputHandler();
 
@@ -15,7 +14,7 @@ public class SchoolApp {
 
     private void run() {
         boolean exit = false;
-        while (exit==false) {
+        while (!exit) {
             printMenu();
             int choice = input.getIntInput("Choose:", 1, 4);
             switch (choice) {
@@ -24,11 +23,8 @@ public class SchoolApp {
                 case 3: searchStudent(); break;
                 case 4: exit = true; break;
             }
-        
+        }
         System.out.println("Goodbye.");
-    }
-
-        
     }
 
     private void addStudent() {
