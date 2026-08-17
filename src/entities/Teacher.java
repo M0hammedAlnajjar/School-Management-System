@@ -9,6 +9,14 @@ public class Teacher extends Person {
     private double salary;
     private List<String> classesTaught;
 
+    public Teacher(String firstName, String lastName, String dateOfBirth, String gender, String phoneNumber, String email, String address, int experienceYears, String subject, double salary, List<String> classesTaught) {
+        super(firstName, lastName, dateOfBirth, gender, phoneNumber, email, address);
+        this.experienceYears = experienceYears;
+        this.subject = subject;
+        this.salary = salary;
+        this.classesTaught = classesTaught;
+    }
+
     public String getSubject() {
         return subject;
     }
@@ -42,7 +50,7 @@ public class Teacher extends Person {
     }
 
 
-
+@Override
     public void displayInfo() {
 
         }
