@@ -1,6 +1,8 @@
 package entities;
 
-public abstract class Person{
+import interfaces.Displayable;
+
+public class Person implements Displayable {
 private String id;
 private String firstName;
 private String lastName;
@@ -91,5 +93,14 @@ private String address;
         this.address = address;
     }
 
-    public abstract void  displayInfo();
+
+    @Override
+    public void displayInfo() {
+
+    }
+
+    @Override
+    public String displaySummary() {
+        return "";
+    }
 }
