@@ -7,9 +7,12 @@ public class HelperUtils {
         return s == null || s.trim().isEmpty();
     }
 
-    public static String generateId(String stu) {
+    public static String generateId() {
 
-        return stu;
+        return "ID-" + (counter++);
+    }
+    public static String generateId(String prefix) {
+        return prefix + "-" + (counter++);
     }
 
     public static boolean isValidString(String s) {
