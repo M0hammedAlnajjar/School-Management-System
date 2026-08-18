@@ -8,7 +8,10 @@ public class HelperUtils {
     }
 
 
-
+    public String getStringInput(String prompt) {
+    System.out.println(prompt+ " ");
+    return prompt;
+    }
 
 
 

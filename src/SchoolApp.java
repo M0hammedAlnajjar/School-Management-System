@@ -28,6 +28,7 @@ public class SchoolApp {
     }
 
     private void addStudent() {
+//        String first =input.
     }
 
     private void viewAllStudents() {
