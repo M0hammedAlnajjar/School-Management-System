@@ -1,5 +1,5 @@
 package utils;
-import java.util.Scanner;
+
 public class HelperUtils {
 
     private static int counter = 1;
@@ -10,6 +10,16 @@ public class HelperUtils {
     public static String generateId(String stu) {
 
         return stu;
+    }
+
+    public static boolean isValidString(String s) {
+        return !isEmpty(s);
+    }
+    public static boolean isValidString(String s, int minLength) {
+        return !isEmpty(s) && s.trim().length() >= minLength;
+    }
+    public static boolean isValidString(String s, int min, int max) {
+        return !isEmpty(s) && s.trim().length() >= min && s.trim().length() <= max;
     }
 
 
@@ -33,20 +43,4 @@ public class HelperUtils {
         return false;
     }
 
-
-    private static final Scanner scanner = new Scanner(System.in);
-
-    public static double getDoubleInput(String prompt) {
-        System.out.print(prompt + " ");
-
-        while (!scanner.hasNextDouble()) {
-            System.out.print("Please type a number: ");
-            scanner.next();
-        }
-
-        double value = scanner.nextDouble();
-        scanner.nextLine();
-
-        return value;
-    }
 }
