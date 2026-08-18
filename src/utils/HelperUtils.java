@@ -15,7 +15,7 @@ public class HelperUtils {
 
 
 
-    public static int getCounter() {
+    public static int getCounter(String stu) {
         return counter;
     }
 

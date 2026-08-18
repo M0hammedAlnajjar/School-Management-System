@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class InputHandler {
     private String department;
     private int teachersManaged;
-    private Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
 
     public int getIntInput(String prompt, int min, int max) {
         while (true) {
@@ -17,15 +17,20 @@ public class InputHandler {
         }
     }
 
-    private int getIntInput(String prompt) {
+    public int getIntInput(String prompt) {
         System.out.print(prompt + " ");
         while (!scanner.hasNextInt()) {
             System.out.println("Invalid input. Please enter a valid number.");
             System.out.print(prompt + " ");
             scanner.next();
         }
-        int result = scanner.nextInt();
+        int value = scanner.nextInt();
         scanner.nextLine();
-        return result;
+        return value;
+    }
+
+    public String getStringInput(String prompt) {
+        System.out.print(prompt + " ");
+        return scanner.nextLine();
     }
 }

@@ -1,3 +1,4 @@
+import entities.Student;
 import services.StudentService;
 import utils.InputHandler;
 
@@ -28,7 +29,11 @@ public class SchoolApp {
     }
 
     private void addStudent() {
-//        String first =input.
+      String first = input.getStringInput("First Name: ");
+      String last = input.getStringInput("Last Name: ");
+      String phone = input.getStringInput("Phone number ");
+      Student s=studentService.addStudent(first,last,phone);
+      System.out.println("Added:" + s.displaySummary());
     }
 
     private void viewAllStudents() {

@@ -32,4 +32,14 @@ public class StudentService implements Manageable {
     public List getAll() {
         return List.of();
     }
+
+    public Student addStudent(String first, String last, String phone) {
+
+
+        return null;
+    }
+
+    private void generateId(String stu) {
+        return;
+    }
 }
