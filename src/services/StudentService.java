@@ -9,31 +9,75 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class StudentService implements Manageable<Student>, Searchable<Student> {
+public class StudentService
+        implements Manageable<Student>,
+        Searchable<Student> {
 
-    private List<Student> students = new ArrayList<>();
+    private List<Student> students =
+            new ArrayList<>();
 
     // =========================
     // GETTERS AND SETTERS
     // =========================
 
     public List<Student> getStudents() {
+
         return students;
     }
 
-    public void setStudents(List<Student> students) {
+    public void setStudents(
+            List<Student> students
+    ) {
+
         this.students = students;
     }
 
     // =========================
-    // ADD STUDENT
+    // ADD STUDENT OBJECT
     // =========================
 
     @Override
     public void add(Student entity) {
+
         if (entity != null) {
+
             students.add(entity);
         }
+    }
+
+    // =========================
+    // ADD STUDENT USING DATA
+    // =========================
+
+    public Student addStudent(
+            String firstName,
+            String lastName,
+            String phoneNumber
+    ) {
+
+        String id =
+                HelperUtils.generateId("STU");
+
+        Student student =
+                new Student(
+                        firstName,
+                        lastName,
+                        "",
+                        "",
+                        phoneNumber,
+                        "",
+                        "",
+                        "Grade 1",
+                        0.0,
+                        new ArrayList<>(),
+                        ""
+                );
+
+        student.setId(id);
+
+        students.add(student);
+
+        return student;
     }
 
     // =========================
@@ -43,13 +87,20 @@ public class StudentService implements Manageable<Student>, Searchable<Student> 
     @Override
     public Student searchById(String id) {
 
-        if (id == null) {
+        if (id == null
+                || id.trim().isEmpty()) {
+
             return null;
         }
 
-        for (Student s : students) {
-            if (s.getId().equals(id)) {
-                return s;
+        for (Student student : students) {
+
+            if (student.getId() != null
+                    && student.getId().equalsIgnoreCase(
+                    id.trim()
+            )) {
+
+                return student;
             }
         }
 
@@ -64,6 +115,7 @@ public class StudentService implements Manageable<Student>, Searchable<Student> 
     public boolean remove(Student entity) {
 
         if (entity == null) {
+
             return false;
         }
 
@@ -76,75 +128,59 @@ public class StudentService implements Manageable<Student>, Searchable<Student> 
 
     @Override
     public List<Student> getAll() {
+
         return students;
     }
 
     // =========================
-    // ADD STUDENT USING INPUT
-    // =========================
-
-    public Student addStudent(
-            String ahmed, String firstName,
-            String lastName,
-            String phone
-    ) {
-
-        String id = HelperUtils.generateId("STU");
-
-        Student student = new Student(
-                id,
-                firstName,
-                lastName,
-                "",
-                "",
-                phone,
-                "",
-                "",
-                "Grade 1",
-                0.0,
-                0
-        );
-
-        students.add(student);
-
-        return student;
-    }
-
-    // =========================
-    // SEARCH STUDENTS
+    // SEARCH USING KEYWORD
     // =========================
 
     @Override
-    public List<Student> search(String keyword) {
+    public List<Student> search(
+            String keyword
+    ) {
 
-        List<Student> results = new ArrayList<>();
+        List<Student> results =
+                new ArrayList<>();
 
-        if (keyword == null || keyword.trim().isEmpty()) {
+        if (keyword == null
+                || keyword.trim().isEmpty()) {
+
             return results;
         }
 
-        keyword = keyword.trim().toLowerCase();
+        String searchKeyword =
+                keyword.trim().toLowerCase();
 
-        for (Student s : students) {
+        for (Student student : students) {
 
-            if (s.getFirstName().toLowerCase().contains(keyword)
-                    || s.getLastName().toLowerCase().contains(keyword)) {
+            String firstName =
+                    student.getFirstName();
 
-                results.add(s);
+            String lastName =
+                    student.getLastName();
+
+            boolean firstNameMatches =
+                    firstName != null
+                            && firstName
+                            .toLowerCase()
+                            .contains(searchKeyword);
+
+            boolean lastNameMatches =
+                    lastName != null
+                            && lastName
+                            .toLowerCase()
+                            .contains(searchKeyword);
+
+            if (firstNameMatches
+                    || lastNameMatches) {
+
+                results.add(student);
             }
         }
 
         return results;
-    }
-
-    @Override
-    public Student searchById(int id) {
-        for (Student s : students) {
-            if (s.getId().equals(id)) {   // use .equals(), not ==
-                return s;
-            }
-        }
-        return null;
     }
 
     // =========================
@@ -152,19 +188,27 @@ public class StudentService implements Manageable<Student>, Searchable<Student> 
     // =========================
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(Object object) {
 
-        if (this == o) {
+        if (this == object) {
+
             return true;
         }
 
-        if (o == null || getClass() != o.getClass()) {
+        if (object == null
+                || getClass()
+                != object.getClass()) {
+
             return false;
         }
 
-        StudentService that = (StudentService) o;
+        StudentService that =
+                (StudentService) object;
 
-        return Objects.equals(students, that.students);
+        return Objects.equals(
+                students,
+                that.students
+        );
     }
 
     // =========================
@@ -173,6 +217,7 @@ public class StudentService implements Manageable<Student>, Searchable<Student> 
 
     @Override
     public int hashCode() {
+
         return Objects.hash(students);
     }
 }
