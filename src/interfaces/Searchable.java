@@ -4,6 +4,6 @@ import java.util.List;
 
 public interface Searchable<T> {
     List<T> search(String keyword);
-    T searchById(int id);
+    T searchById(String id);
 
 }

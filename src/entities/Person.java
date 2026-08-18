@@ -124,8 +124,11 @@ public class Person implements Displayable {
             return false;
 
 
-        if (!(obj instanceof Person))  return false;
-        Person p= (Person) obj;
+        if (!(obj instanceof Person)) return false;
+        Person p = (Person) obj;
         return this.id.equals(p.id);
 
-    }}
+    }
+
+
+}

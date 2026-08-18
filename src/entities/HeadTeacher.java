@@ -8,6 +8,8 @@ public class HeadTeacher extends Teacher {
 
     public HeadTeacher(String firstName, String lastName, String dateOfBirth, String gender, String phoneNumber, String email, String address, int experienceYears, String subject, double salary, List<String> classesTaught) {
         super(firstName, lastName, dateOfBirth, gender, phoneNumber, email, address, experienceYears, subject, salary, classesTaught);
+        this.department=department;
+        this.teachersManaged=teachersManaged;
     }
 
 

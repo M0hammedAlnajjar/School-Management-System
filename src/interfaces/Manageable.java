@@ -11,4 +11,5 @@ public interface Manageable<T> {
     boolean remove(T entity);
     List<T> getAll();
 
+    Student searchById(int id);
 }
