@@ -21,36 +21,60 @@ public class StudentService implements Manageable {
 
     @Override
     public void add(Object entity) {
-
-    }
-@Override
-public Student  searchById(String id) {
-    for (Student s : students) {
-        if (s.getId().equals(id)) {
-            return s;
+        if (entity instanceof Student) {
+            students.add((Student) entity);
         }
     }
-    return null;
-}
+
+    @Override
+    public Student searchById(String id) {
+        for (Student s : students) {
+            if (s.getId().equals(id)) {
+                return s;
+            }
+        }
+        return null;
+    }
+
     @Override
     public boolean remove(Object entity) {
+        if (entity instanceof Student) {
+            return students.remove(entity);
+        }
         return false;
     }
 
     @Override
-    public List getAll() {
-        return List.of();
+    public List<Student> getAll() {
+        return students;
     }
 
-    public Student addStudent(String first, String last, String phone) {
-        String id= HelperUtils.generateId("STU");
+    public Student addStudent(
+            String first,
+            String last,
+            String phone,
+            String lastName
+    ) {
+        String id = HelperUtils.generateId("STU");
 
+        Student s = new Student(
+                id,
+                first,
+                lastName,
+                "",
+                "",
+                phone,
+                "",
+                "",
+                "Grade 1",
+                0.0,
+                0
+        );
 
+        students.add(s);
 
-        return null;
+        return s;
     }
 
-    private void generateId(String stu) {
-        return;
-    }
+
 }

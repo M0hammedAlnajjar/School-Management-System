@@ -34,7 +34,7 @@ public class SchoolApp {
         String first = input.getStringInput("First Name: ");
         String last = input.getStringInput("Last Name: ");
         String phone = input.getStringInput("Phone number ");
-        Student s=studentService.addStudent(first,last,phone);
+        Student s=studentService.addStudent(first,last,phone, last);
         System.out.println("Added:" + s.displaySummary());
     }
 
@@ -63,6 +63,26 @@ public class SchoolApp {
     }
 
     private void loadSampleData() {
+        studentService.addStudent(
+                "Ahmed",
+                "Ali",
+                "91234567",
+                "Ali"
+        );
+
+        studentService.addStudent(
+                "Sara",
+                "Mohammed",
+                "92345678",
+                "Mohammed"
+        );
+
+        studentService.addStudent(
+                "John",
+                "Smith",
+                "93456789",
+                "Smith"
+        );
     }
 
     public InputHandler getInput() {

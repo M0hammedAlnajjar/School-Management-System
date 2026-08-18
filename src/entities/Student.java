@@ -18,6 +18,9 @@ public class Student extends Person {
 
     }
 
+    public Student(String id, String first, String lastName, String gender, String phoneNumber, String phone, String address, String gradeLevel, String s, double v, int i) {
+    }
+
     public String getGradeLevel() {
         return gradeLevel;
     }
