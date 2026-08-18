@@ -7,6 +7,11 @@ public class HelperUtils {
         return s == null || s.trim().isEmpty();
     }
 
+    public static String generateId(String stu) {
+
+        return stu;
+    }
+
 
     public String getStringInput(String prompt) {
     System.out.println(prompt+ " ");

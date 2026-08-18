@@ -46,6 +46,11 @@ public class SchoolApp {
     }
 
     private void searchStudent() {
+        String id = input.getStringInput("Student ID: ");
+        Student s =studentService.searchById(id);
+        if(s!=null) {
+            System.out.println(s);
+        }
     }
 
     private void printMenu() {

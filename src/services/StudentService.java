@@ -2,6 +2,7 @@ package services;
 
 import entities.Student;
 import interfaces.Manageable;
+import utils.HelperUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +43,8 @@ public Student  searchById(String id) {
     }
 
     public Student addStudent(String first, String last, String phone) {
+        String id= HelperUtils.generateId("STU");
+
 
 
         return null;

@@ -33,4 +33,5 @@ public class InputHandler {
         System.out.print(prompt + " ");
         return scanner.nextLine();
     }
+
 }
