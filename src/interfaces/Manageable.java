@@ -1,15 +1,18 @@
 package interfaces;
-import entities.Student;
 
 import java.util.List;
 
 public interface Manageable<T> {
+
+    // Add an Entity
     void add(T entity);
 
-    Student searchById(String id);
+    // Search by String ID
+    T searchById(String id);
 
+    // Remove an Entity
     boolean remove(T entity);
-    List<T> getAll();
 
-    Student searchById(int id);
+    // Get All Entities
+    List<T> getAll();
 }
