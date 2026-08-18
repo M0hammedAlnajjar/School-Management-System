@@ -19,10 +19,21 @@ public class SchoolApp {
             printMenu();
             int choice = input.getIntInput("Choose:", 1, 4);
             switch (choice) {
-                case 1: addStudent(); break;
-                case 2: viewAllStudents(); break;
-                case 3: searchStudent(); break;
-                case 4: exit = true; break;
+                case 1:
+                    addStudent();
+                    break;
+
+                case 2:
+                    viewAllStudents();
+                    break;
+
+                case 3:
+                    searchStudent();
+                    break;
+
+                case 4:
+                    exit = true;
+                    break;
             }
         }
         System.out.println("Goodbye.");
@@ -40,7 +51,12 @@ public class SchoolApp {
 
     private void viewAllStudents() {
         System.out.println("=== All Student  ===");
-        for(Object s:studentService.getAll()) {
+        if (studentService.getAll().isEmpty()) {
+            System.out.println("No students found.");
+            return;
+        }
+
+        for (Student s : studentService.getAll()) {
             System.out.println(s);
         }
     }

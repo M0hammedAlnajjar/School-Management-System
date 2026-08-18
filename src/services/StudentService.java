@@ -33,6 +33,7 @@ public class StudentService implements Manageable {
                 return s;
             }
         }
+
         return null;
     }
 
@@ -41,6 +42,7 @@ public class StudentService implements Manageable {
         if (entity instanceof Student) {
             return students.remove(entity);
         }
+
         return false;
     }
 
@@ -49,18 +51,14 @@ public class StudentService implements Manageable {
         return students;
     }
 
-    public Student addStudent(
-            String first,
-            String last,
-            String phone,
-            String lastName
-    ) {
+    public Student addStudent(String first, String last, String phone, String ali) {
+
         String id = HelperUtils.generateId("STU");
 
-        Student s = new Student(
+        Student student = new Student(
                 id,
                 first,
-                lastName,
+                last,
                 "",
                 "",
                 phone,
@@ -71,10 +69,8 @@ public class StudentService implements Manageable {
                 0
         );
 
-        students.add(s);
+        students.add(student);
 
-        return s;
+        return student;
     }
-
-
 }
