@@ -9,13 +9,20 @@ public class Student extends Person {
     private double feeBalance;
     private List<String> subjects;
 
-    public Student(String firstName, String lastName, String dateOfBirth, String gender, String phoneNumber, String email, String address, String gradeLevel, double feeBalance, List<String> subjects, String enrollmentDate) {
+    public Student(String gradeLevel, String enrollmentDate, String dateOfBirth, String gender, String phoneNumber, String email, String address, String level, double feeBalance, List<String> subjects, String date) {
+        this.gradeLevel = gradeLevel;
+        this.enrollmentDate = enrollmentDate;
+        this.feeBalance = feeBalance;
+        this.subjects =
+                subjects == null ? new ArrayList<>() : new ArrayList<>(subjects);
+    }
+
+    public Student(String firstName, String lastName, String dateOfBirth, String gender, String phoneNumber, String email, String address, String gradeLevel, String enrollmentDate, double feeBalance, List<String> subjects) {
         super(firstName, lastName, dateOfBirth, gender, phoneNumber, email, address);
         this.gradeLevel = gradeLevel;
-        this.feeBalance = feeBalance;
-        this.subjects = new ArrayList<>();
         this.enrollmentDate = enrollmentDate;
-
+        this.feeBalance = feeBalance;
+        this.subjects = subjects;
     }
 
     public Student(String id, String first, String lastName, String gender, String phoneNumber, String phone, String address, String gradeLevel, String s, double v, int i) {
@@ -45,7 +52,9 @@ public class Student extends Person {
         if (feeBalance < 0) {
             System.out.println("Fee balance cannot be negative");
             this.feeBalance = 0;
+            return;
         }
+
         this.feeBalance = feeBalance;
     }
 
