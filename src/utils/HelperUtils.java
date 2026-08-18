@@ -58,8 +58,7 @@ public class HelperUtils {
     }
 
     public static boolean isValidNumber(int value, int min, int max) {
-
-        return false;
+        return value >= min && value <= max;
     }
 
 }
