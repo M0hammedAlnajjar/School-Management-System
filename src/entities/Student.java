@@ -4,86 +4,167 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Student extends Person {
+
     private String gradeLevel;
     private String enrollmentDate;
     private double feeBalance;
     private List<String> subjects;
 
-    public Student(String gradeLevel, String enrollmentDate, String dateOfBirth, String gender, String phoneNumber, String email, String address, String level, double feeBalance, List<String> subjects, String date) {
+    // Constructor
+    public Student(
+            String firstName,
+            String lastName,
+            String dateOfBirth,
+            String gender,
+            String phoneNumber,
+            String email,
+            String address,
+            String gradeLevel,
+            double feeBalance,
+            List<String> subjects,
+            String enrollmentDate
+    ) {
+
+        super(
+                firstName,
+                lastName,
+                dateOfBirth,
+                gender,
+                phoneNumber,
+                email,
+                address
+        );
+
         this.gradeLevel = gradeLevel;
-        this.enrollmentDate = enrollmentDate;
         this.feeBalance = feeBalance;
-        this.subjects =
-                subjects == null ? new ArrayList<>() : new ArrayList<>(subjects);
-    }
 
-    public Student(String firstName, String lastName, String dateOfBirth, String gender, String phoneNumber, String email, String address, String gradeLevel, String enrollmentDate, double feeBalance, List<String> subjects) {
-        super(firstName, lastName, dateOfBirth, gender, phoneNumber, email, address);
-        this.gradeLevel = gradeLevel;
+        if (subjects == null) {
+
+            this.subjects = new ArrayList<>();
+
+        } else {
+
+            this.subjects = subjects;
+        }
+
         this.enrollmentDate = enrollmentDate;
-        this.feeBalance = feeBalance;
-        this.subjects = subjects;
     }
 
-    public Student(String id, String first, String lastName, String gender, String phoneNumber, String phone, String address, String gradeLevel, String s, double v, int i) {
-    }
-
+    // Grade Level Getter
     public String getGradeLevel() {
+
         return gradeLevel;
     }
 
-    public void setGradeLevel(String gradeLevel) {
+    // Grade Level Setter
+    public void setGradeLevel(
+            String gradeLevel
+    ) {
+
         this.gradeLevel = gradeLevel;
     }
 
+    // Enrollment Date Getter
     public String getEnrollmentDate() {
+
         return enrollmentDate;
     }
 
-    public void setEnrollmentDate(String enrollmentDate) {
+    // Enrollment Date Setter
+    public void setEnrollmentDate(
+            String enrollmentDate
+    ) {
+
         this.enrollmentDate = enrollmentDate;
     }
 
+    // Fee Balance Getter
     public double getFeeBalance() {
+
         return feeBalance;
     }
 
-    public void setFeeBalance(double feeBalance) {
+    // Fee Balance Setter
+    public void setFeeBalance(
+            double feeBalance
+    ) {
+
         if (feeBalance < 0) {
-            System.out.println("Fee balance cannot be negative");
+
+            System.out.println(
+                    "Fee balance cannot be negative."
+            );
+
             this.feeBalance = 0;
+
             return;
         }
 
         this.feeBalance = feeBalance;
     }
 
+    // Subjects Getter
     public List<String> getSubjects() {
+
         return subjects;
     }
 
-    public void setSubjects(List<String> subjects) {
-        this.subjects = subjects;
+    // Subjects Setter
+    public void setSubjects(
+            List<String> subjects
+    ) {
+
+        if (subjects == null) {
+
+            this.subjects = new ArrayList<>();
+
+        } else {
+
+            this.subjects = subjects;
+        }
     }
 
+    // Display Student Information
     @Override
     public void displayInfo() {
-        super.displayInfo();
-        System.out.println("Student:"+getFirstName()+" "+getLastName()+"GradeLevel: " + gradeLevel+ " |fee balance: " + feeBalance);
 
+        super.displayInfo();
+
+        System.out.println(
+                "Student: "
+                        + getFirstName()
+                        + " "
+                        + getLastName()
+                        + " | Grade Level: "
+                        + gradeLevel
+                        + " | Fee Balance: "
+                        + feeBalance
+        );
     }
 
-    public void updateContact(String phone) {
+    // Update Phone Number
+    public void updateContact(
+            String phone
+    ) {
+
         setPhoneNumber(phone);
     }
-    public void updateContact(String phone, String email) {
+
+    // Update Phone Number and Email
+    public void updateContact(
+            String phone,
+            String email
+    ) {
+
         setPhoneNumber(phone);
         setEmail(email);
-
     }
-    public void addSubject(String subject) {
+
+    // Add Subject
+    public void addSubject(
+            String subject
+    ) {
+
         subjects.add(subject);
-
-
     }
 }
