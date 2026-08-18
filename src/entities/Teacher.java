@@ -16,7 +16,7 @@ public class Teacher extends Person {
         this.subject = subject;
         this.salary = salary;
         this.classesTaught = classesTaught;
-        this.classesTaught=new ArrayList<>();
+        this.classesTaught = new ArrayList<>();
     }
 
 
