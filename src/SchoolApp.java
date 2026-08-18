@@ -29,14 +29,20 @@ public class SchoolApp {
     }
 
     private void addStudent() {
-      String first = input.getStringInput("First Name: ");
-      String last = input.getStringInput("Last Name: ");
-      String phone = input.getStringInput("Phone number ");
-      Student s=studentService.addStudent(first,last,phone);
-      System.out.println("Added:" + s.displaySummary());
+        System.out.println();
+        System.out.println("=== School Menu ===");
+        String first = input.getStringInput("First Name: ");
+        String last = input.getStringInput("Last Name: ");
+        String phone = input.getStringInput("Phone number ");
+        Student s=studentService.addStudent(first,last,phone);
+        System.out.println("Added:" + s.displaySummary());
     }
 
     private void viewAllStudents() {
+        System.out.println("=== All Student  ===");
+        for(Object s:studentService.getAll()) {
+            System.out.println(s);
+        }
     }
 
     private void searchStudent() {

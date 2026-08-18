@@ -22,7 +22,15 @@ public class StudentService implements Manageable {
     public void add(Object entity) {
 
     }
-
+@Override
+public Student  searchById(String id) {
+    for (Student s : students) {
+        if (s.getId().equals(id)) {
+            return s;
+        }
+    }
+    return null;
+}
     @Override
     public boolean remove(Object entity) {
         return false;

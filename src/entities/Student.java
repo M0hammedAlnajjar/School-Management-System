@@ -1,5 +1,6 @@
 package entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Student extends Person {
@@ -12,8 +13,9 @@ public class Student extends Person {
         super(firstName, lastName, dateOfBirth, gender, phoneNumber, email, address);
         this.gradeLevel = gradeLevel;
         this.feeBalance = feeBalance;
-        this.subjects = subjects;
+        this.subjects = new ArrayList<>();
         this.enrollmentDate = enrollmentDate;
+
     }
 
     public String getGradeLevel() {
@@ -58,6 +60,5 @@ public class Student extends Person {
         System.out.println("Student:"+getFirstName()+" "+getLastName()+"GradeLevel: " + gradeLevel+ " |fee balance: " + feeBalance);
 
     }
-
 
 }
