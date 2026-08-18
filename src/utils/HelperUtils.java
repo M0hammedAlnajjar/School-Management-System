@@ -3,62 +3,125 @@ package utils;
 public class HelperUtils {
 
     private static int counter = 1;
-    public static boolean isEmpty(String s) {
-        return s == null || s.trim().isEmpty();
+
+    // Check if String is Empty
+    public static boolean isEmpty(
+            String value
+    ) {
+
+        return value == null
+                || value.trim().isEmpty();
     }
 
+    // Generate General ID
     public static String generateId() {
 
-        return "ID-" + (counter++);
-    }
-    public static String generateId(String prefix) {
-        return prefix + "-" + (counter++);
+        return "ID-" + counter++;
     }
 
-    public static boolean isPositive(int n) {
-        return n > 0;
-    }
-    public static boolean isPositive(double n) {
-        return n > 0;
-    }
+    // Generate ID Using Prefix
+    public static String generateId(
+            String prefix
+    ) {
 
-    public static boolean isValidNumber(double n, double min, double max) {
-        return n >= min && n <= max;
-    }
-
-    // ---- isValidAge ----
-    public static boolean isValidAge(int age) {
-        return age >= 0 && age <= 120;
+        return prefix
+                + "-"
+                + counter++;
     }
 
-    public static boolean isValidString(String s) {
-        return !isEmpty(s);
-    }
-    public static boolean isValidString(String s, int minLength) {
-        return !isEmpty(s) && s.trim().length() >= minLength;
-    }
-    public static boolean isValidString(String s, int min, int max) {
-        return !isEmpty(s) && s.trim().length() >= min && s.trim().length() <= max;
+    // Check Positive Integer
+    public static boolean isPositive(
+            int number
+    ) {
+
+        return number > 0;
     }
 
+    // Check Positive Double
+    public static boolean isPositive(
+            double number
+    ) {
 
-    public String getStringInput(String prompt) {
-    System.out.println(prompt+ " ");
-    return prompt;
+        return number > 0;
     }
 
+    // Validate Double Number Range
+    public static boolean isValidNumber(
+            double number,
+            double min,
+            double max
+    ) {
 
+        return number >= min
+                && number <= max;
+    }
 
-    public static int getCounter(String stu) {
+    // Validate Integer Number Range
+    public static boolean isValidNumber(
+            int value,
+            int min,
+            int max
+    ) {
+
+        return value >= min
+                && value <= max;
+    }
+
+    // Validate Age
+    public static boolean isValidAge(
+            int age
+    ) {
+
+        return age >= 0
+                && age <= 120;
+    }
+
+    // Validate String
+    public static boolean isValidString(
+            String value
+    ) {
+
+        return !isEmpty(value);
+    }
+
+    // Validate String Minimum Length
+    public static boolean isValidString(
+            String value,
+            int minLength
+    ) {
+
+        return !isEmpty(value)
+                && value.trim().length()
+                >= minLength;
+    }
+
+    // Validate String Length Range
+    public static boolean isValidString(
+            String value,
+            int minLength,
+            int maxLength
+    ) {
+
+        return !isEmpty(value)
+                && value.trim().length()
+                >= minLength
+                && value.trim().length()
+                <= maxLength;
+    }
+
+    // Counter Getter
+    public static int getCounter(
+            String prefix
+    ) {
+
         return counter;
     }
 
-    public static void setCounter(int counter) {
+    // Counter Setter
+    public static void setCounter(
+            int counter
+    ) {
+
         HelperUtils.counter = counter;
     }
-
-    public static boolean isValidNumber(int value, int min, int max) {
-        return value >= min && value <= max;
-    }
-
 }
